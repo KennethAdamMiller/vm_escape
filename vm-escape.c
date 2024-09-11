@@ -725,6 +725,10 @@ size_t qemu_get_leaked_chunk(struct rtl8139_ring *ring, size_t nb_packet,
 			}
 		}
 	}
+	if (!nb_leak) {
+		warnx("[!] searched %lu packets with %lu size, %"PRIxHPTR", no chunk found", 
+				nb_packet, size, (long unsigned) leak);
+	}
 	return nb_leak;
 }
 
@@ -1015,7 +1019,7 @@ int main()
 	if (!nb_leak) {
 		errx(-1, "[!] failed to find usable chunks");
 	}
-	warnx("[+] found %d potential ObjectProperty structs in memory", nb_leak);
+	warnx("[+] found %lu potential ObjectProperty structs in memory", nb_leak);
 
 	score = qemu_get_leaked_object_property(leak, nb_leak,
 	                                        &leak_object,
