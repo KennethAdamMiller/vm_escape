@@ -1,3 +1,4 @@
 newinitrd.img
 ./extracted/**/**
 ramdisk.img
+/extracted/
